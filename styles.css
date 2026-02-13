@@ -11,11 +11,13 @@ body {
   margin: 0;
   font-family: "Inter", sans-serif;
   line-height: 1.6;
-  background-color: #0e0e0e;
+  background-color: #0b0b0b;
   color: #f2f2f2;
 }
 
-/* Background inspired by album cover */
+/* --- Layered, "more going on" background --- */
+
+/* 1) Album cover blurred + darkened */
 body::before {
   content: "";
   position: fixed;
@@ -23,41 +25,83 @@ body::before {
   background-image: url("images/album-cover.jpg");
   background-size: cover;
   background-position: center;
-  filter: grayscale(100%) blur(6px);
-  opacity: 0.12;
+  filter: grayscale(100%) blur(10px);
+  opacity: 0.16;
+  transform: scale(1.05);
+  z-index: -3;
+}
+
+/* 2) Gradients + vignette + subtle light areas */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background:
+    radial-gradient(900px 500px at 50% 18%, rgba(255,255,255,0.10), rgba(0,0,0,0) 55%),
+    radial-gradient(700px 600px at 15% 65%, rgba(255,255,255,0.06), rgba(0,0,0,0) 60%),
+    radial-gradient(800px 700px at 85% 70%, rgba(255,255,255,0.05), rgba(0,0,0,0) 62%),
+    linear-gradient(to bottom, rgba(0,0,0,0.55), rgba(0,0,0,0.85)),
+    radial-gradient(circle at center, rgba(0,0,0,0) 40%, rgba(0,0,0,0.75) 100%);
+  z-index: -2;
+}
+
+/* 3) Subtle grid texture (very light so it doesn’t kill readability) */
+main::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background:
+    repeating-linear-gradient(
+      to right,
+      rgba(255,255,255,0.03),
+      rgba(255,255,255,0.03) 1px,
+      rgba(0,0,0,0) 1px,
+      rgba(0,0,0,0) 120px
+    ),
+    repeating-linear-gradient(
+      to bottom,
+      rgba(255,255,255,0.02),
+      rgba(255,255,255,0.02) 1px,
+      rgba(0,0,0,0) 1px,
+      rgba(0,0,0,0) 120px
+    );
+  opacity: 0.35;
   z-index: -1;
 }
 
+/* Images */
 img {
   max-width: 100%;
   height: auto;
   display: block;
 }
 
-/* Header */
+/* --- Header --- */
 
 header {
   text-align: center;
-  padding: 2rem 1rem;
-}
-
-header h1 {
-  font-family: "Bebas Neue", sans-serif;
-  font-size: 3.2rem;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  margin: 0.25rem 0 0.5rem;
+  padding: 2.2rem 1rem 1.6rem;
 }
 
 header p {
   font-size: 0.9rem;
-  opacity: 0.8;
+  opacity: 0.82;
+  margin: 0.25rem 0;
 }
 
-/* Layout */
+header h1 {
+  font-family: "Bebas Neue", sans-serif;
+  font-size: 3.4rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  margin: 0.4rem 0 0.7rem;
+  text-shadow: 0 10px 40px rgba(0,0,0,0.7);
+}
+
+/* --- Layout (Grid) --- */
 
 main {
-  max-width: 1100px;
+  max-width: 1120px;
   margin: 0 auto;
   padding: 1.5rem;
   display: grid;
@@ -65,108 +109,33 @@ main {
   gap: 2rem;
 }
 
-/* Content panels */
+/* --- Panels (article + aside) --- */
 
 article,
 aside {
-  background-color: rgba(15, 15, 15, 0.8);
-  border: 1px solid #2a2a2a;
-  border-radius: 12px;
-  padding: 1.25rem;
+  background: linear-gradient(to bottom, rgba(18,18,18,0.78), rgba(10,10,10,0.78));
+  border: 1px solid rgba(255,255,255,0.10);
+  border-radius: 16px;
+  padding: 1.35rem;
+  box-shadow:
+    0 20px 60px rgba(0,0,0,0.55),
+    0 1px 0 rgba(255,255,255,0.05) inset;
 }
 
-/* Sections */
+/* Add a subtle top highlight line like album design */
+article::before,
+aside::before {
+  content: "";
+  display: block;
+  height: 2px;
+  width: 100%;
+  background: linear-gradient(to right, rgba(255,255,255,0.25), rgba(255,255,255,0));
+  border-radius: 999px;
+  margin-bottom: 1rem;
+  opacity: 0.7;
+}
+
+/* --- Section styling --- */
 
 article section {
-  margin-bottom: 2rem;
-}
-
-h2 {
-  font-family: "Bebas Neue", sans-serif;
-  letter-spacing: 0.1em;
-  margin-bottom: 0.5rem;
-}
-
-h2 + p {
-  margin-top: 0;
-}
-
-/* Lyrics */
-
-blockquote {
-  margin: 1.25rem 0;
-  padding: 1.25rem;
-  background-color: rgba(27, 27, 27, 0.9);
-  border-left: 4px solid #bdbdbd;
-}
-
-blockquote::before {
-  content: "“";
-  font-family: "Bebas Neue", sans-serif;
-  font-size: 3rem;
-  line-height: 0;
-  opacity: 0.35;
-  display: block;
-  margin-bottom: 0.5rem;
-}
-
-blockquote p {
-  margin: 0 0 0.75rem;
-}
-
-/* Aside */
-
-aside ul {
-  list-style: none;
-  padding: 0;
-  margin-top: 1rem;
-}
-
-aside li {
-  margin-bottom: 0.5rem;
-}
-
-/* Footer */
-
-footer {
-  text-align: center;
-  font-size: 0.75rem;
-  padding: 2rem 1rem;
-  border-top: 1px solid #333;
-}
-
-footer ul {
-  list-style: none;
-  padding: 0;
-}
-
-footer li {
-  display: inline-block;
-  margin: 0 0.5rem;
-}
-
-/* Links */
-
-a {
-  color: #e0e0e0;
-  text-decoration: none;
-}
-
-a:hover,
-a:focus-visible {
-  text-decoration: underline;
-}
-
-a[href^="https"]::after {
-  content: " ↗";
-  font-size: 0.85em;
-  opacity: 0.75;
-}
-
-/* Responsive */
-
-@media (max-width: 768px) {
-  main {
-    grid-template-columns: 1fr;
-  }
-}
+  margin-bot
