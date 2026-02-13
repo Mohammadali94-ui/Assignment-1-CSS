@@ -24,7 +24,7 @@ The goal of the assignment was to design a single-page website featuring the lyr
 - GitHub Pages
 
 ## Live Site
-https://YOUR_USERNAME.github.io/assignment-1/
+https://mohammadali94-ui.github.io/Assignment-1-CSS/
 
 ## Notes
 All code was written by hand for educational purposes.  
