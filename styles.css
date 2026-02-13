@@ -1,0 +1,172 @@
+/*
+  Basic CSS reset inspired by MDN Web Docs
+  Source: https://developer.mozilla.org/
+*/
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: "Inter", sans-serif;
+  line-height: 1.6;
+  background-color: #0e0e0e;
+  color: #f2f2f2;
+}
+
+/* Background inspired by album cover */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background-image: url("images/album-cover.jpg");
+  background-size: cover;
+  background-position: center;
+  filter: grayscale(100%) blur(6px);
+  opacity: 0.12;
+  z-index: -1;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Header */
+
+header {
+  text-align: center;
+  padding: 2rem 1rem;
+}
+
+header h1 {
+  font-family: "Bebas Neue", sans-serif;
+  font-size: 3.2rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  margin: 0.25rem 0 0.5rem;
+}
+
+header p {
+  font-size: 0.9rem;
+  opacity: 0.8;
+}
+
+/* Layout */
+
+main {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 1.5rem;
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 2rem;
+}
+
+/* Content panels */
+
+article,
+aside {
+  background-color: rgba(15, 15, 15, 0.8);
+  border: 1px solid #2a2a2a;
+  border-radius: 12px;
+  padding: 1.25rem;
+}
+
+/* Sections */
+
+article section {
+  margin-bottom: 2rem;
+}
+
+h2 {
+  font-family: "Bebas Neue", sans-serif;
+  letter-spacing: 0.1em;
+  margin-bottom: 0.5rem;
+}
+
+h2 + p {
+  margin-top: 0;
+}
+
+/* Lyrics */
+
+blockquote {
+  margin: 1.25rem 0;
+  padding: 1.25rem;
+  background-color: rgba(27, 27, 27, 0.9);
+  border-left: 4px solid #bdbdbd;
+}
+
+blockquote::before {
+  content: "“";
+  font-family: "Bebas Neue", sans-serif;
+  font-size: 3rem;
+  line-height: 0;
+  opacity: 0.35;
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+blockquote p {
+  margin: 0 0 0.75rem;
+}
+
+/* Aside */
+
+aside ul {
+  list-style: none;
+  padding: 0;
+  margin-top: 1rem;
+}
+
+aside li {
+  margin-bottom: 0.5rem;
+}
+
+/* Footer */
+
+footer {
+  text-align: center;
+  font-size: 0.75rem;
+  padding: 2rem 1rem;
+  border-top: 1px solid #333;
+}
+
+footer ul {
+  list-style: none;
+  padding: 0;
+}
+
+footer li {
+  display: inline-block;
+  margin: 0 0.5rem;
+}
+
+/* Links */
+
+a {
+  color: #e0e0e0;
+  text-decoration: none;
+}
+
+a:hover,
+a:focus-visible {
+  text-decoration: underline;
+}
+
+a[href^="https"]::after {
+  content: " ↗";
+  font-size: 0.85em;
+  opacity: 0.75;
+}
+
+/* Responsive */
+
+@media (max-width: 768px) {
+  main {
+    grid-template-columns: 1fr;
+  }
+}
